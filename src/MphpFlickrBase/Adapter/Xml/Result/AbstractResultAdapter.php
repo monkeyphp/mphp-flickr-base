@@ -1,0 +1,127 @@
+<?php
+/**
+ * AbstractResultSet.php
+ *
+ * PHP Version  PHP 5.3.10
+ *
+ * @category   MphpFlickrBase
+ * @package    MphpFlickrBase
+ * @subpackage MphpFlickrBase\Adapter\Xml\Result
+ * @author     David White [monkeyphp] <git@monkeyphp.com>
+ */
+namespace MphpFlickrBase\Adapter\Xml\Result;
+
+/**
+ * AbstractResult
+ *
+ * @category   MphpFlickrBase
+ * @package    MphpFlickrBase
+ * @subpackage MphpFlickrBase\Adapter\Xml\Result
+ * @author     David White [monkeyphp] <git@monkeyphp.com>
+ * @abstract
+ */
+class AbstractResultAdapter extends \MphpFlickrBase\Adapter\AbstractResultAdapter
+{
+    
+    /**
+     * DOMXPath query string used to retrieve the stat value
+     * 
+     * @var string
+     */
+    protected $statQuery = '/rsp/@stat';
+    
+    /**
+     * DOMXPath query string used to retrieve the error code
+     * 
+     * @var string
+     */
+    protected $errCodeQuery  = '/rsp/err/@code';
+    
+    /**
+     * DOMXPath query string used to retrieve the error message
+     * 
+     * @var string
+     */
+    protected $errMsgQuery = '/rsp/err/@msg';
+    
+    /**
+     * Return the DOMXPath query string used to retrieve the stat value
+     * 
+     * @return string
+     */
+    protected function getStatQuery()
+    {
+        return $this->statQuery;
+    }
+    
+    /**
+     * Return the DOMXPath query string used to retrieve the err code value
+     * 
+     * @return string
+     */
+    protected function getErrCodeQuery()
+    {
+        return $this->errCodeQuery;
+    }
+    
+    /**
+     * Return the DOMXPath query string used to retrieve the err msg value
+     * 
+     * @return string
+     */
+    protected function getErrMsgQuery()
+    {
+        return $this->errMsgQuery;
+    }
+    
+    /**
+     * Return the err code value
+     * 
+     * @return string|null
+     */
+    public function getErrCode() 
+    {
+        if (! isset($this->errCode)) {
+            $this->errCode = $this->getDomXPath($this->getDomDocument())->query($this->getErrCodeQuery())->item(0)->value;
+        }
+        return $this->errCode;
+    }
+
+    /**
+     * Return the err msg value
+     * 
+     * @return string|null
+     */
+    public function getErrMsg() 
+    {
+        if (! isset($this->errMsg)) {
+            $this->errMsg = $this->getDomXPath($this->getDomDocument())->query($this->getErrMsgQuery())->item(0)->value;
+        }
+        return $this->errMsg;
+    }
+
+    /**
+     * Return the stat value
+     * 
+     * @return string|null
+     */
+    public function getStat()
+    {
+        if (! isset($this->stat)) {
+            $this->stat = $this->getDomXPath($this->getDomDocument())->query($this->getStatQuery())->item(0)->value;
+        }
+        return $this->stat;
+    }
+    
+    /**
+     * Return a boolean indicating that the request to the Flickr api resulted in 
+     * a fail
+     * 
+     * @return boolean
+     */
+    public function isFail() 
+    {
+        return $this->getStat() === \MphpFlickrBase\Adapter\Interfaces\ResultSet\ResultSetAdapterInterface::STAT_FAIL;
+    }
+    
+}
