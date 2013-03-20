@@ -124,7 +124,7 @@ class AbstractResultAdapterTest extends \PHPUnit_Framework_TestCase
         
         $this->assertInstanceOf('MphpFlickrBase\Adapter\Xml\Result\AbstractResultAdapter', $resultAdapter);
         
-        $this->assertSame($results, $resultAdapter->getResults());
+        $this->assertSame($xml, $resultAdapter->getResults());
     }
     
     /**
