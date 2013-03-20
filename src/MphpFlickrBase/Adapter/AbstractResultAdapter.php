@@ -79,4 +79,25 @@ abstract class AbstractResultAdapter implements \MphpFlickrBase\Adapter\Interfac
         return $this->parameters;
     }
 
+    /**
+     * Return a boolean indicating that the request to the Flickr api resulted in 
+     * a fail
+     * 
+     * @return boolean
+     */
+    public function isFail() 
+    {
+        return $this->getStat() === \MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface::STAT_FAIL;
+    }
+
+    /**
+     * Return a boolean indicating that the request to the Flickr api is ok
+     * 
+     * @return boolean
+     */
+    public function isOk() 
+    {
+        return $this->getStat() === \MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface::STAT_OK;
+    }
+
 }
