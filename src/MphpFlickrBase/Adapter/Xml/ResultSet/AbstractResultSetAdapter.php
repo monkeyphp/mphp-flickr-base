@@ -156,7 +156,7 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
      */
     public function isFail()
     {
-        return $this->getStat() === \MphpFlickrBase\Adapter\Interfaces\Result\ResultSet::STAT_FAIL;
+        return $this->getStat() === \MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface::STAT_FAIL;
     }
 
 
