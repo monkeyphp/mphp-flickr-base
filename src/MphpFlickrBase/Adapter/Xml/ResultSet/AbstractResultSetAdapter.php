@@ -15,7 +15,7 @@ namespace MphpFlickrBase\Adapter\Xml\ResultSet;
  * AbstractResultSet
  *
  * Abstract Xml ResultSet adapter
- * 
+ *
  * @category   MphpFlickrBase
  * @package    MphpFlickrBase
  * @subpackage MphpFlickrBase\Adapter\Xml\ResultSet
@@ -44,77 +44,77 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
     protected $resultDomNodeList;
 
     /**
-     * Instance of \DOMDocument used to access the results retrieved from the 
+     * Instance of \DOMDocument used to access the results retrieved from the
      * Flickr api
-     * 
+     *
      * @var \DOMDocument
      */
     protected $domDocument;
 
     /**
      * DOMXPath instance used to query the \DOMDocument instance
-     * 
+     *
      * @var \DOMXPath
      */
     protected $domXPath;
 
     /**
      * DOMXPath query string used to retrieve the stat value
-     * 
+     *
      * @var string
      */
     protected $statQuery = '/rsp/@stat';
-    
+
     /**
      * DOMXPath query string used to retrieve the error code
-     * 
+     *
      * @var string
      */
     protected $errCodeQuery  = '/rsp/err/@code';
-    
+
     /**
      * DOMXPath query string used to retrieve the error message
-     * 
+     *
      * @var string
      */
     protected $errMsgQuery = '/rsp/err/@msg';
-    
+
     /**
      * Return the DOMXPath query string used to retrieve the stat value
-     * 
+     *
      * @return string
      */
     protected function getStatQuery()
     {
         return $this->statQuery;
     }
-    
+
     /**
      * Return the DOMXPath query string used to retrieve the err code value
-     * 
+     *
      * @return string
      */
     protected function getErrCodeQuery()
     {
         return $this->errCodeQuery;
     }
-    
+
     /**
      * Return the DOMXPath query string used to retrieve the err msg value
-     * 
+     *
      * @return string
      */
     protected function getErrMsgQuery()
     {
         return $this->errMsgQuery;
     }
-    
+
     /**
      * Return the err code value
-     * 
+     *
      * @return string|null
      */
-    public function getErrCode() 
+    public function getErrCode()
     {
         if (! isset($this->errCode)) {
             $this->errCode = $this->getDomXPath($this->getDomDocument())->query($this->getErrCodeQuery())->item(0)->value;
@@ -124,10 +124,10 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
 
     /**
      * Return the err msg value
-     * 
+     *
      * @return string|null
      */
-    public function getErrMsg() 
+    public function getErrMsg()
     {
         if (! isset($this->errMsg)) {
             $this->errMsg = $this->getDomXPath($this->getDomDocument())->query($this->getErrMsgQuery())->item(0)->value;
@@ -137,7 +137,7 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
 
     /**
      * Return the stat value
-     * 
+     *
      * @return string|null
      */
     public function getStat()
@@ -147,19 +147,19 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
         }
         return $this->stat;
     }
-    
+
     /**
-     * Return a boolean indicating that the request to the Flickr api resulted in 
+     * Return a boolean indicating that the request to the Flickr api resulted in
      * a fail
-     * 
+     *
      * @return boolean
      */
-    public function isFail() 
+    public function isFail()
     {
         return $this->getStat() === \MphpFlickrBase\Adapter\Interfaces\Result\ResultSet::STAT_FAIL;
     }
-    
-    
+
+
     /**
      * Return an instance of \SplFixedArray configured to the length of the
      * ResultDomNodeList
@@ -198,7 +198,7 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
     {
         if (! isset($this->domDocument)) {
 
-            $domDocument = new DOMDocument();
+            $domDocument = new \DOMDocument();
 
             if (! @$domDocument->loadXML($this->getResults())) {
                 throw new \RuntimeException('The xml results could not be loaded');

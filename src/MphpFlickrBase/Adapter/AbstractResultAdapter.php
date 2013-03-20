@@ -13,37 +13,37 @@ namespace MphpFlickrBase\Adapter;
 
 /**
  * AbstractResultAdapter
- * 
+ *
  * Abstract result adapter
  *
  * @category   MphpFlickrBase
  * @package    MphpFlickrBase
  * @subpackage MphpFlickrBase\Adapter
  * @author     David White [monkeyphp] <git@monkeyphp.com>
- * @abstract 
+ * @abstract
  */
 abstract class AbstractResultAdapter implements \MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface
 {
 
     /**
      * The stat of the result
-     * 
+     *
      * @var string|null
      */
     protected $stat;
-    
+
     /**
      *
      * @var string|null
      */
     protected $errCode;
-    
+
     /**
      *
      * @var string|null
      */
     protected $errMsg;
-    
+
     /**
      * Mixed collection of raw results as returned from the Flickr api
      *
@@ -61,10 +61,10 @@ abstract class AbstractResultAdapter implements \MphpFlickrBase\Adapter\Interfac
 
     /**
      * Constructor
-     * 
+     *
      * @param mixed|string $results    The results as returned from Flickr api
      * @param mixed|array  $parameters The query parameters sent to the Flickr api
-     * 
+     *
      * @return void
      */
     public function __construct($results, $parameters)
@@ -72,12 +72,12 @@ abstract class AbstractResultAdapter implements \MphpFlickrBase\Adapter\Interfac
         $this->setResults($results);
         $this->setParameters($parameters);
     }
-    
+
     /**
      * Set the results property
-     * 
+     *
      * @param mixed|string $results The results as retured from the Flickr api
-     * 
+     *
      * @return \MphpFlickrBase\Adapter\AbstractResultAdapter
      */
     protected function setResults($results)
@@ -85,7 +85,7 @@ abstract class AbstractResultAdapter implements \MphpFlickrBase\Adapter\Interfac
         $this->results = $results;
         return $this;
     }
-    
+
     /**
      * Return the results
      *
@@ -98,17 +98,17 @@ abstract class AbstractResultAdapter implements \MphpFlickrBase\Adapter\Interfac
 
     /**
      * Set the parameters
-     * 
+     *
      * @param array $parameters The parameters used to query the Flickr api with
-     * 
+     *
      * @return \MphpFlickrBase\Adapter\AbstractResultAdapter
      */
-    protected function setParamters($parameters)
+    protected function setParameters($parameters)
     {
         $this->parameters = $parameters;
         return $this;
     }
-    
+
     /**
      * Return the parameters
      *
@@ -120,22 +120,22 @@ abstract class AbstractResultAdapter implements \MphpFlickrBase\Adapter\Interfac
     }
 
     /**
-     * Return a boolean indicating that the request to the Flickr api resulted in 
+     * Return a boolean indicating that the request to the Flickr api resulted in
      * a fail
-     * 
+     *
      * @return boolean
      */
-    public function isFail() 
+    public function isFail()
     {
         return $this->getStat() === \MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface::STAT_FAIL;
     }
 
     /**
      * Return a boolean indicating that the request to the Flickr api is ok
-     * 
+     *
      * @return boolean
      */
-    public function isOk() 
+    public function isOk()
     {
         return $this->getStat() === \MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface::STAT_OK;
     }
