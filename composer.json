@@ -43,5 +43,6 @@
         "psr-0": {
             "MphpFlickrBase": "src/"
         }
-    }
+    },
+    "version": "1.0.0"
 }
