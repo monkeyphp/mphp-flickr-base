@@ -275,6 +275,4 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
         return ($this->position < $this->getResultDomNodeList()->length);
     }
 
-    
-
 }

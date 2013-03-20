@@ -30,6 +30,8 @@ class AbstractResult implements ResultAdapterInterface
     protected $adapter;
     
     /**
+     * Return the ResultAdapterInterface
+     * 
      * @return \MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface
      */
     public function getAdapter() 
@@ -48,5 +50,6 @@ class AbstractResult implements ResultAdapterInterface
     {
         $this->adapter = $adapter;
         return $this;
-    }    
+    }
+    
 }
