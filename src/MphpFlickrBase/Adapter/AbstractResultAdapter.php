@@ -60,6 +60,33 @@ abstract class AbstractResultAdapter implements \MphpFlickrBase\Adapter\Interfac
     protected $parameters;
 
     /**
+     * Constructor
+     * 
+     * @param mixed|string $results    The results as returned from Flickr api
+     * @param mixed|array  $parameters The query parameters sent to the Flickr api
+     * 
+     * @return void
+     */
+    public function __construct($results, $parameters)
+    {
+        $this->setResults($results);
+        $this->setParameters($parameters);
+    }
+    
+    /**
+     * Set the results property
+     * 
+     * @param mixed|string $results The results as retured from the Flickr api
+     * 
+     * @return \MphpFlickrBase\Adapter\AbstractResultAdapter
+     */
+    protected function setResults($results)
+    {
+        $this->results = $results;
+        return $this;
+    }
+    
+    /**
      * Return the results
      *
      * @return array|mixed|null
@@ -69,6 +96,19 @@ abstract class AbstractResultAdapter implements \MphpFlickrBase\Adapter\Interfac
         return $this->results;
     }
 
+    /**
+     * Set the parameters
+     * 
+     * @param array $parameters The parameters used to query the Flickr api with
+     * 
+     * @return \MphpFlickrBase\Adapter\AbstractResultAdapter
+     */
+    protected function setParamters($parameters)
+    {
+        $this->parameters = $parameters;
+        return $this;
+    }
+    
     /**
      * Return the parameters
      *
