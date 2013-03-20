@@ -22,8 +22,22 @@ namespace MphpFlickrBase\Adapter\Interfaces\Result;
 interface ResultAdapterInterface
 {
     
+    /**
+     * Constant indicating that the results returned from the 
+     * Flickr api are failed
+     * {@link http://www.flickr.com/services/api/response.rest.html}
+     * 
+     * @var string
+     */
     const STAT_FAIL = 'fail';
     
+    /**
+     * Constant indicating that the results returned from the 
+     * Flickr api are ok
+     * {@link http://www.flickr.com/services/api/response.rest.html}
+     * 
+     * @var string
+     */
     const STAT_OK = 'ok';
     
     /**
