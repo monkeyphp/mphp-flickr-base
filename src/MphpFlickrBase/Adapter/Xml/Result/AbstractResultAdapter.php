@@ -113,15 +113,4 @@ class AbstractResultAdapter extends \MphpFlickrBase\Adapter\AbstractResultAdapte
         return $this->stat;
     }
     
-    /**
-     * Return a boolean indicating that the request to the Flickr api resulted in 
-     * a fail
-     * 
-     * @return boolean
-     */
-    public function isFail() 
-    {
-        return $this->getStat() === \MphpFlickrBase\Adapter\Interfaces\ResultSet\ResultSetAdapterInterface::STAT_FAIL;
-    }
-    
 }
