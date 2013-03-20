@@ -23,12 +23,17 @@ class AbstractResultAdapterTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Test that we can create a mock of the AbstractResultAdapter
+     * Test that we can construct an instance of \MphpFlickrBase\Adapter\AbstractResultAdapter
+     *
+     * @covers MphpFlickrBase\Adapter\AbstractResultAdapter::__construct()
+     * @covers MphpFlickrBase\Adapter\AbstractResultAdapter::setParameters()
+     * @covers MphpFlickrBase\Adapter\AbstractResultAdapter::setResults()
      */
-    public function testCanConstructInstance()
+    public function test__construct()
     {
-        $resultSet = $this->getMock('MphpFlickrBase\Adapter\AbstractResultAdapter');
-        $this->assertInstanceOf('MphpFlickrBase\Adapter\AbstractResultAdapter', $resultSet);
+        $results = array();
+        $parameters = array();
+        $resultAdapter = $this->getMockForAbstractClass('MphpFlickrBase\Adapter\AbstractResultAdapter', array($results, $parameters), 'ResultAdapter', true, false, true, array());
     }
 
 }
