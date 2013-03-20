@@ -11,6 +11,8 @@
  */
 namespace MphpFlickrBase\Result;
 
+use MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface;
+
 /**
  * ResultInterface
  * 
@@ -22,8 +24,21 @@ namespace MphpFlickrBase\Result;
 interface ResultInterface 
 {
     
-    public function setAdapter(\MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface $adapter);
+    /**
+     * Set the ResultAdapterInterface instance that this Result instance will
+     * use to access the data retrieved from the Flickr api
+     * 
+     * @param ResultAdapterInterface $adapter
+     * 
+     * @return ResultInterface
+     */
+    public function setAdapter(ResultAdapterInterface $adapter);
     
+    /**
+     * Return the ResultAdapterInterface
+     * 
+     * @return ResultAdapterInterface
+     */
     public function getAdapter();
     
 }
