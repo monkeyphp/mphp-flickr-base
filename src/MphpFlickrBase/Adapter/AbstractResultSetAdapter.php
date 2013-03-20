@@ -15,12 +15,12 @@ namespace MphpFlickrBase\Adapter;
  * AbstractResultSetAdapter
  *
  * Abstract adapter
- * 
+ *
  * @category   MphpFlickrBase
  * @package    MphpFlickrBase
  * @subpackage MphpFlickrBase\Adapter
  * @author     David White [monkeyphp] <git@monkeyphp.com>
- * @abstract 
+ * @abstract
  */
 abstract class AbstractResultSetAdapter extends AbstractResultAdapter implements \MphpFlickrBase\Adapter\Interfaces\ResultSet\ResultSetAdapterInterface
 {
@@ -46,26 +46,6 @@ abstract class AbstractResultSetAdapter extends AbstractResultAdapter implements
      * @var int
      */
     protected $position = 0;
-    
-    /**
-     * Return the results
-     *
-     * @return array|mixed|null
-     */
-    public function getResults()
-    {
-        return $this->results;
-    }
-
-    /**
-     * Return the parameters
-     *
-     * @return mixed|array|null
-     */
-    public function getParameters()
-    {
-        return $this->parameters;
-    }
 
     /**
      * Iterator interface
