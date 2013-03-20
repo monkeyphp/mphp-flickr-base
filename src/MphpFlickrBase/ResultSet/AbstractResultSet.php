@@ -11,6 +11,10 @@
  */
 namespace MphpFlickrBase\ResultSet;
 
+use MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface;
+use MphpFlickrBase\Adapter\Interfaces\ResultSet\ResultSetAdapterInterface;
+use MphpFlickrBase\Result\AbstractResult;
+
 /**
  * AbstractResultSet
  *
@@ -19,17 +23,17 @@ namespace MphpFlickrBase\ResultSet;
  * @subpackage MphpFlickrBase\ResultSet
  * @author     David White [monkeyphp] <git@monkeyphp.com>
  */
-class AbstractResultSet extends \MphpFlickrBase\Result\AbstractResult implements \MphpFlickrBase\ResultSet\ResultSetInterface
+class AbstractResultSet extends AbstractResult implements \MphpFlickrBase\ResultSet\ResultSetInterface
 {
     
     /**
      * Return an instance of \MphpFlickrBase\Result\AbstractResult
      * 
-     * @return \MphpFlickrBase\Result\AbstractResult
+     * @return AbstractResult
      */
     public function current() 
     {
-        /* @var $adapter \MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface */
+        /* @var $adapter ResultAdapterInterface */
         $adapter = $this->getAdapter()->current();
         
         //@todo return an instance of AbstractResult($adapter)
@@ -78,7 +82,7 @@ class AbstractResultSet extends \MphpFlickrBase\Result\AbstractResult implements
     /**
      * Return the Adapter instance that this ResultSet class uses to access data
      * 
-     * @return \MphpFlickrBase\Adapter\Interfaces\ResultSet\ResultSetAdapterInterface
+     * @return ResultSetAdapterInterface
      */
     public function getAdapter() 
     {
@@ -91,11 +95,11 @@ class AbstractResultSet extends \MphpFlickrBase\Result\AbstractResult implements
      * Overrides method declared in \MphpFlickrBase\Result\ResultInterface and
      * defined in \MphpFlickrBase\Result\AbstractResult
      * 
-     * @param \MphpFlickrBase\Adapter\Interfaces\ResultSet\ResultSetAdapterInterface $adapter The adapter instace
+     * @param ResultSetAdapterInterface $adapter The adapter instace
      * 
      * @return \MphpFlickrBase\ResultSet\AbstractResultSet
      */
-    public function setAdapter(\MphpFlickrBase\Adapter\Interfaces\ResultSet\ResultSetAdapterInterface $adapter) 
+    public function setAdapter(ResultSetAdapterInterface $adapter) 
     {
         $this->adapter = $adapter;
         return $this;
