@@ -57,6 +57,13 @@ interface ResultAdapterInterface
     public function isFail();
     
     /**
+     * Return a boolean indicating if the results are okay
+     * 
+     * @return boolan
+     */
+    public function isOk();
+    
+    /**
      * Return the error code
      * 
      * Only applicable is isFail returns true
