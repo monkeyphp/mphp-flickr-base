@@ -2,6 +2,8 @@
 
 A base library for accessing the Flickr api http://www.flickr.com/services/api/
 
+[![Build Status](https://travis-ci.org/monkeyphp/mphp-flickr-base.png)](https://travis-ci.org/monkeyphp/mphp-flickr-base)
+
 ## Purpose
 
 This Flickr client library provides base classes and interfaces for creating a
