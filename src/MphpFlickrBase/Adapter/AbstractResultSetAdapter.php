@@ -11,6 +11,9 @@
  */
 namespace MphpFlickrBase\Adapter;
 
+use MphpFlickrBase\Adapter\Interfaces\ResultSet\ResultSetAdapterInterface;
+use MphpFlickrBase\Adapter\AbstractResultAdapter;
+
 /**
  * AbstractResultSetAdapter
  *
@@ -22,7 +25,7 @@ namespace MphpFlickrBase\Adapter;
  * @author     David White [monkeyphp] <git@monkeyphp.com>
  * @abstract
  */
-abstract class AbstractResultSetAdapter extends AbstractResultAdapter implements \MphpFlickrBase\Adapter\Interfaces\ResultSet\ResultSetAdapterInterface
+abstract class AbstractResultSetAdapter extends AbstractResultAdapter implements ResultSetAdapterInterface
 {
 
     /**

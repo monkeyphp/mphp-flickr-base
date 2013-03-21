@@ -11,10 +11,13 @@
  */
 namespace MphpFlickrBase\Adapter;
 
+use MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface;
+
 /**
  * AbstractResultAdapter
  *
- * Abstract result adapter
+ * Abstract base result Adapter. All other Adapters should extend from here
+ * and should implement the same constructor interface.
  *
  * @category   MphpFlickrBase
  * @package    MphpFlickrBase
@@ -22,7 +25,7 @@ namespace MphpFlickrBase\Adapter;
  * @author     David White [monkeyphp] <git@monkeyphp.com>
  * @abstract
  */
-abstract class AbstractResultAdapter implements \MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface
+abstract class AbstractResultAdapter implements ResultAdapterInterface
 {
 
     /**
@@ -33,12 +36,14 @@ abstract class AbstractResultAdapter implements \MphpFlickrBase\Adapter\Interfac
     protected $stat;
 
     /**
+     * The error code returned from the Flickr api if there was a problem
      *
      * @var string|null
      */
     protected $errCode;
 
     /**
+     * The error message returned from the Flickr api if there was a problem
      *
      * @var string|null
      */
@@ -127,7 +132,7 @@ abstract class AbstractResultAdapter implements \MphpFlickrBase\Adapter\Interfac
      */
     public function isFail()
     {
-        return $this->getStat() === \MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface::STAT_FAIL;
+        return $this->getStat() === ResultAdapterInterface::STAT_FAIL;
     }
 
     /**
@@ -137,7 +142,7 @@ abstract class AbstractResultAdapter implements \MphpFlickrBase\Adapter\Interfac
      */
     public function isOk()
     {
-        return $this->getStat() === \MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface::STAT_OK;
+        return $this->getStat() === ResultAdapterInterface::STAT_OK;
     }
 
 }
