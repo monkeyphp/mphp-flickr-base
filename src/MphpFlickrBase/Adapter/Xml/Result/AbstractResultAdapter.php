@@ -14,6 +14,9 @@ namespace MphpFlickrBase\Adapter\Xml\Result;
 /**
  * AbstractResult
  *
+ * Base Xml Result class providing a base implementation of a Result Adapter
+ * designed for working with the Xml results returned from the Flickr api
+ *
  * @category   MphpFlickrBase
  * @package    MphpFlickrBase
  * @subpackage MphpFlickrBase\Adapter\Xml\Result
@@ -84,12 +87,16 @@ class AbstractResultAdapter extends \MphpFlickrBase\Adapter\AbstractResultAdapte
     /**
      * Return the err code value
      *
+     * An Xml implementation of {@link \MphpFlickrBase\Adapter\Interfaces\ResultAdapterInterface::getErrCode()}
+     *
      * @return string|null
      */
     public function getErrCode()
     {
         if (! isset($this->errCode)) {
-            $this->errCode = $this->getDomXPath($this->getDomDocument())->query($this->getErrCodeQuery())->item(0)->value;
+            $this->errCode = (($nodeList = $this->getDomXPath($this->getDomDocument())->query($this->getErrCodeQuery())) && $nodeList->length)
+                ? $nodeList->item(0)->value
+                : null;
         }
         return $this->errCode;
     }
@@ -97,12 +104,16 @@ class AbstractResultAdapter extends \MphpFlickrBase\Adapter\AbstractResultAdapte
     /**
      * Return the err msg value
      *
+     * An Xml implementation of {@link \MphpFlickrBase\Adapter\Interfaces\ResultAdapterInterface::getErrMsg()}
+     *
      * @return string|null
      */
     public function getErrMsg()
     {
         if (! isset($this->errMsg)) {
-            $this->errMsg = $this->getDomXPath($this->getDomDocument())->query($this->getErrMsgQuery())->item(0)->value;
+            $this->errMsg = (($nodeList = $this->getDomXPath($this->getDomDocument())->query($this->getErrMsgQuery())) && $nodeList->length)
+                ? $nodeList->item(0)->value
+                : null;
         }
         return $this->errMsg;
     }
@@ -110,12 +121,16 @@ class AbstractResultAdapter extends \MphpFlickrBase\Adapter\AbstractResultAdapte
     /**
      * Return the stat value
      *
+     * An Xml implementation of {@link \MphpFlickrBase\Adapter\Interfaces\ResultAdapterInterface::getStat()}
+     *
      * @return string|null
      */
     public function getStat()
     {
         if (! isset($this->stat)) {
-            $this->stat = $this->getDomXPath($this->getDomDocument())->query($this->getStatQuery())->item(0)->value;
+            $this->stat = (($nodeList = $this->getDomXPath($this->getDomDocument())->query($this->getStatQuery())) && $nodeList->length)
+                ? $nodeList->item(0)->value
+                : null;
         }
         return $this->stat;
     }
