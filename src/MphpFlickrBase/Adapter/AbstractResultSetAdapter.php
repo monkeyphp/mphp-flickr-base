@@ -17,7 +17,8 @@ use MphpFlickrBase\Adapter\AbstractResultAdapter;
 /**
  * AbstractResultSetAdapter
  *
- * Abstract adapter
+ * Base abstract ResultSetAdapter implementation providing basic Iterator
+ * functionality
  *
  * @category   MphpFlickrBase
  * @package    MphpFlickrBase
