@@ -19,6 +19,10 @@ use MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface;
  * Abstract base result Adapter. All other Adapters should extend from here
  * and should implement the same constructor interface.
  *
+ * This base class provides an implementation of the ResultInterface providing
+ * basic constructor functionality and basic reporting of successful or failed
+ * requests to the Flickr api.
+ *
  * @category   MphpFlickrBase
  * @package    MphpFlickrBase
  * @subpackage MphpFlickrBase\Adapter
