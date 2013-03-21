@@ -11,7 +11,7 @@
  */
 namespace MphpFlickrBase\ResultSet;
 
-use MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface;
+// use MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface;
 use MphpFlickrBase\Adapter\Interfaces\ResultSet\ResultSetAdapterInterface;
 use MphpFlickrBase\Result\AbstractResult;
 
@@ -25,84 +25,96 @@ use MphpFlickrBase\Result\AbstractResult;
  */
 class AbstractResultSet extends AbstractResult implements \MphpFlickrBase\ResultSet\ResultSetInterface
 {
-    
+
+    /**
+     * Constructor
+     *
+     * @param \MphpFlickrBase\Adapter\Interfaces\ResultSet\ResultSetAdapterInterface $resultSetAdapterInterface
+     *
+     * @return void
+     */
+    public function __construct(ResultSetAdapterInterface $resultSetAdapterInterface)
+    {
+        $this->setAdapter($resultSetAdapterInterface);
+    }
+
     /**
      * Return an instance of \MphpFlickrBase\Result\AbstractResult
-     * 
+     *
      * @return AbstractResult
      */
-    public function current() 
+    public function current()
     {
         /* @var $adapter ResultAdapterInterface */
         $adapter = $this->getAdapter()->current();
-        
+
         //@todo return an instance of AbstractResult($adapter)
     }
 
     /**
      * Iterator interface
-     * 
+     *
      * @return void
      */
-    public function key() 
+    public function key()
     {
         return $this->getAdapter()->key();
     }
 
     /**
      * Iterator interface
-     * 
+     *
      * @return void
      */
-    public function next() 
+    public function next()
     {
         return $this->getAdapter()->next();
     }
 
     /**
      * Iterator interface
-     * 
+     *
      * @return void
      */
-    public function rewind() 
+    public function rewind()
     {
         return $this->getAdapter()->rewind();
     }
 
     /**
      * Iterator interface
-     * 
+     *
      * @return boolean
      */
-    public function valid() 
+    public function valid()
     {
         return $this->getAdapter()->valid();
     }
 
     /**
      * Return the Adapter instance that this ResultSet class uses to access data
-     * 
+     *
      * @return ResultSetAdapterInterface
      */
-    public function getAdapter() 
+    public function getAdapter()
     {
         return $this->adapter;
     }
 
     /**
      * Set the adapter instance that this ResultSet uses to access data
-     * 
+     *
      * Overrides method declared in \MphpFlickrBase\Result\ResultInterface and
      * defined in \MphpFlickrBase\Result\AbstractResult
-     * 
+     *
      * @param ResultSetAdapterInterface $adapter The adapter instace
-     * 
+     *
      * @return \MphpFlickrBase\ResultSet\AbstractResultSet
      */
-    public function setAdapter(ResultSetAdapterInterface $adapter) 
+    public function setAdapter(ResultSetAdapterInterface $adapter)
     {
         $this->adapter = $adapter;
         return $this;
-    }  
-    
+    }
+
 }
