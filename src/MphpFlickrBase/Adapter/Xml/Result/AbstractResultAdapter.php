@@ -11,6 +11,10 @@
  */
 namespace MphpFlickrBase\Adapter\Xml\Result;
 
+use DOMDocument;
+use DOMXPath;
+use RuntimeException;
+
 /**
  * AbstractResult
  *
@@ -50,7 +54,7 @@ class AbstractResultAdapter extends \MphpFlickrBase\Adapter\AbstractResultAdapte
     /**
      * DOMXPath instance used to query the \DOMDocument instance
      *
-     * @var \DOMXPath
+     * @var DOMXPath
      */
     protected $domXPath;
 
@@ -138,14 +142,14 @@ class AbstractResultAdapter extends \MphpFlickrBase\Adapter\AbstractResultAdapte
     /**
      * Return an instance of DOMXPath for querying the supplied DOMDocument with
      *
-     * @param \DOMDocument $domDocument The DOMDocument instance to create a DOMXPath instance for
+     * @param DOMDocument $domDocument The DOMDocument instance to create a DOMXPath instance for
      *
-     * @return \DOMXPath
+     * @return DOMXPath
      */
-    protected function getDomXPath(\DOMDocument $domDocument)
+    protected function getDomXPath(DOMDocument $domDocument)
     {
         if (! isset($this->domXPath)) {
-            $this->domXPath = new \DOMXPath($domDocument);
+            $this->domXPath = new DOMXPath($domDocument);
         }
         return $this->domXPath;
     }
@@ -153,17 +157,17 @@ class AbstractResultAdapter extends \MphpFlickrBase\Adapter\AbstractResultAdapte
     /**
      * To access to results xml data, instances of ResultSet use DOMDocument
      *
-     * @throws \RuntimeException
-     * @return \DOMDocument
+     * @throws RuntimeException
+     * @return DOMDocument
      */
     protected function getDomDocument()
     {
         if (! isset($this->domDocument)) {
 
-            $domDocument = new \DOMDocument();
+            $domDocument = new DOMDocument();
 
             if (! @$domDocument->loadXML($this->getResults())) {
-                throw new \RuntimeException('The xml results could not be loaded');
+                throw new RuntimeException('The xml results could not be loaded');
             }
 
             $this->domDocument = $domDocument;

@@ -11,6 +11,13 @@
  */
 namespace MphpFlickrBase\Adapter\Xml\ResultSet;
 
+use DOMDocument;
+use DOMNodeList;
+use DOMXPath;
+use MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface;
+use RuntimeException;
+use SplFixedArray;
+
 /**
  * AbstractResultSet
  *
@@ -31,7 +38,7 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
      * As the ResultSet is iterated through, instances of AbstractResultAdapter
      * are put into the storage instance
      *
-     * @var \SplFixedArray
+     * @var SplFixedArray
      */
     protected $storage;
 
@@ -39,7 +46,7 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
      * An instance of DOMNodeList containing the XML records for individual Result
      * instances
      *
-     * @var \DOMNodeList
+     * @var DOMNodeList
      */
     protected $resultDomNodeList;
 
@@ -47,14 +54,14 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
      * Instance of \DOMDocument used to access the results retrieved from the
      * Flickr api
      *
-     * @var \DOMDocument
+     * @var DOMDocument
      */
     protected $domDocument;
 
     /**
      * DOMXPath instance used to query the \DOMDocument instance
      *
-     * @var \DOMXPath
+     * @var DOMXPath
      */
     protected $domXPath;
 
@@ -112,12 +119,16 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
     /**
      * Return the err code value
      *
+     * An Xml implementation of {@link \MphpFlickrBase\Adapter\Interfaces\ResultAdapterInterface::getErrCode()}
+     *
      * @return string|null
      */
     public function getErrCode()
     {
         if (! isset($this->errCode)) {
-            $this->errCode = $this->getDomXPath($this->getDomDocument())->query($this->getErrCodeQuery())->item(0)->value;
+            $this->errCode = (($nodeList = $this->getDomXPath($this->getDomDocument())->query($this->getErrCodeQuery())) && $nodeList->length)
+                ? $nodeList->item(0)->value
+                : null;
         }
         return $this->errCode;
     }
@@ -125,12 +136,16 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
     /**
      * Return the err msg value
      *
+     * An Xml implementation of {@link \MphpFlickrBase\Adapter\Interfaces\ResultAdapterInterface::getErrMsg()}
+     *
      * @return string|null
      */
     public function getErrMsg()
     {
         if (! isset($this->errMsg)) {
-            $this->errMsg = $this->getDomXPath($this->getDomDocument())->query($this->getErrMsgQuery())->item(0)->value;
+            $this->errMsg = (($nodeList = $this->getDomXPath($this->getDomDocument())->query($this->getErrMsgQuery())) && $nodeList->length)
+                ? $nodeList->item(0)->value
+                : null;
         }
         return $this->errMsg;
     }
@@ -138,12 +153,16 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
     /**
      * Return the stat value
      *
+     * An Xml implementation of {@link \MphpFlickrBase\Adapter\Interfaces\ResultAdapterInterface::getStat()}
+     *
      * @return string|null
      */
     public function getStat()
     {
         if (! isset($this->stat)) {
-            $this->stat = $this->getDomXPath($this->getDomDocument())->query($this->getStatQuery())->item(0)->value;
+            $this->stat = (($nodeList = $this->getDomXPath($this->getDomDocument())->query($this->getStatQuery())) && $nodeList->length)
+                ? $nodeList->item(0)->value
+                : null;
         }
         return $this->stat;
     }
@@ -156,7 +175,7 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
      */
     public function isFail()
     {
-        return $this->getStat() === \MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface::STAT_FAIL;
+        return $this->getStat() === ResultAdapterInterface::STAT_FAIL;
     }
 
 
@@ -164,12 +183,12 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
      * Return an instance of \SplFixedArray configured to the length of the
      * ResultDomNodeList
      *
-     * @return \SplFixedArray
+     * @return SplFixedArray
      */
     protected function getStorage()
     {
         if (! isset($this->storage)) {
-            $this->storage = new \SplFixedArray($this->getResultDomNodeList()->length);
+            $this->storage = new SplFixedArray($this->getResultDomNodeList()->length);
         }
         return $this->storage;
     }
@@ -178,7 +197,7 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
      * ResultSet instances iterate through lists of contained Results. The raw xml
      * results for those Results are retrieved from an instance of DOMNodeList
      *
-     * @var \DOMNodeList
+     * @var DOMNodeList
      */
     protected function getResultDomNodeList()
     {
@@ -191,17 +210,17 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
     /**
      * To access to results xml data, instances of ResultSet use DOMDocument
      *
-     * @throws \RuntimeException
-     * @return \DOMDocument
+     * @throws RuntimeException
+     * @return DOMDocument
      */
     protected function getDomDocument()
     {
         if (! isset($this->domDocument)) {
 
-            $domDocument = new \DOMDocument();
+            $domDocument = new DOMDocument();
 
             if (! @$domDocument->loadXML($this->getResults())) {
-                throw new \RuntimeException('The xml results could not be loaded');
+                throw new RuntimeException('The xml results could not be loaded');
             }
 
             $this->domDocument = $domDocument;
@@ -213,13 +232,13 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
      * Return the DOMXPath query string that will be used to query the
      * DOMDocument for the data for the Result adapters
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      * @return string
      */
     protected function getResultDomNodeListQuery()
     {
         if (! isset($this->resultDomNodeListQuery)) {
-            throw new \RuntimeException('Did you set the dom node list query string?');
+            throw new RuntimeException('Did you set the dom node list query string?');
         }
         return $this->resultDomNodeListQuery;
     }
@@ -227,14 +246,14 @@ class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSet
     /**
      * Return an instance of DOMXPath for querying the supplied DOMDocument with
      *
-     * @param \DOMDocument $domDocument The DOMDocument instance to create a DOMXPath instance for
+     * @param DOMDocument $domDocument The DOMDocument instance to create a DOMXPath instance for
      *
-     * @return \DOMXPath
+     * @return DOMXPath
      */
-    protected function getDomXPath(\DOMDocument $domDocument)
+    protected function getDomXPath(DOMDocument $domDocument)
     {
         if (! isset($this->domXPath)) {
-            $this->domXPath = new \DOMXPath($domDocument);
+            $this->domXPath = new DOMXPath($domDocument);
         }
         return $this->domXPath;
     }
