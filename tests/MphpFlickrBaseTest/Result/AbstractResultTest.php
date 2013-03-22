@@ -30,6 +30,8 @@ class AbstractResultTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceof('MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface', $resultAdapter);
         
         $result = $this->getMockForAbstractClass('MphpFlickrBase\Result\AbstractResult', array($resultAdapter), 'Result', true);
+        
+        $this->assertSame($resultAdapter, $result->getAdapter());
     }
     
 }
