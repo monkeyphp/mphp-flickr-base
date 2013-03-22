@@ -18,8 +18,9 @@ namespace MphpFlickrBase\Result;
  * @package    MphpFlickrBase
  * @subpackage MphpFlickrBase\Result
  * @author     David White [monkeyphp] <git@monkeyphp.com>
+ * @abstract
  */
-class AbstractResult implements ResultAdapterInterface
+abstract class AbstractResult implements ResultInterface
 {
 
     /**
