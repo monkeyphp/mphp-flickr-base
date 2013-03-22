@@ -23,7 +23,7 @@ use MphpFlickrBase\Result\AbstractResult;
  * @subpackage MphpFlickrBase\ResultSet
  * @author     David White [monkeyphp] <git@monkeyphp.com>
  */
-class AbstractResultSet extends AbstractResult implements \MphpFlickrBase\ResultSet\ResultSetInterface
+class AbstractResultSet implements \MphpFlickrBase\ResultSet\ResultSetInterface
 {
 
     /**
@@ -91,6 +91,13 @@ class AbstractResultSet extends AbstractResult implements \MphpFlickrBase\Result
         return $this->getAdapter()->valid();
     }
 
+    /**
+     * Set the Adapter instance that this Result instance will retrieve its data from
+     *
+     * @var \MphpFlickrBase\Adapter\Interfaces\Result\ResultAdapterInterface
+     */
+    protected $adapter;
+    
     /**
      * Return the Adapter instance that this ResultSet class uses to access data
      *
