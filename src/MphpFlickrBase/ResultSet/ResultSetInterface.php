@@ -21,5 +21,22 @@ namespace MphpFlickrBase\ResultSet;
  */
 interface ResultSetInterface extends \Iterator
 {
-
+    
+    /**
+     * Set the ResultAdapterInterface instance that this Result instance will
+     * use to access the data retrieved from the Flickr api
+     * 
+     * @param ResultAdapterInterface $adapter
+     * 
+     * @return ResultInterface
+     */
+    public function setAdapter(\MphpFlickrBase\Adapter\Interfaces\ResultSet\ResultSetAdapterInterface $adapter);
+    
+    /**
+     * Return the ResultAdapterInterface
+     * 
+     * @return ResultAdapterInterface
+     */
+    public function getAdapter();
+    
 }

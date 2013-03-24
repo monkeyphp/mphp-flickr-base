@@ -25,10 +25,16 @@ class AbstractConnectorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test that we can construct a Connector instance
      */
-    public function test__construct()
+    public function test__constructWithoutHttpClient()
     {
         $apiKey = '0123456789';
         $connector = $this->getMockForAbstractClass('MphpFlickrBase\Connector\AbstractConnector', array($apiKey), 'AbstractConnector', true);
     }
 
+    public function test__constructWithHttpClient()
+    {
+        $apiKey = '0123456789';
+        $httpClient = $this->getMock('Zend\Http\Client');
+        $connector = $this->getMockForAbstractClass('MphpFlickrBase\Connector\AbstractConnector', array($apiKey, $httpClient), 'AbstractConnector', true);
+    }
 }
