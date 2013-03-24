@@ -13,7 +13,7 @@ namespace MphpFlickrBase\ResultSet;
 
 /**
  * ResultSetInterface
- * 
+ *
  * @category   MphpFlickrBase
  * @package    MphpFlickrBase
  * @subpackage MphpFlickrBase\ResultSet

@@ -39,16 +39,28 @@ class AbstractResultSet extends AbstractResult implements \MphpFlickrBase\Result
     }
 
     /**
+     * Return the name of the Result class that is returned through each iteration
+     * of the ResultSet
+     *
+     * @return string
+     */
+    protected function getResultClass()
+    {
+        return $this->resultClass;
+    }
+
+    /**
      * Return an instance of \MphpFlickrBase\Result\AbstractResult
      *
      * @return AbstractResult
      */
     public function current()
     {
-        /* @var $adapter ResultAdapterInterface */
-        $adapter = $this->getAdapter()->current();
-
-        //@todo return an instance of AbstractResult($adapter)
+        /* @var $resultAdapter ResultAdapterInterface */
+        $resultAdapter = $this->getAdapter()->current();
+        $resultClass = $this->getResultClass();
+        $result = new $resultClass($resultAdapter);
+        return $result;
     }
 
     /**
