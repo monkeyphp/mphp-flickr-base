@@ -56,4 +56,40 @@ class AbstractConnectorTest extends \PHPUnit_Framework_TestCase
         $parameters = array();
         $reflectionMethod->invoke($connector, $parameters);
     }
+
+    public function testGetServiceUrl()
+    {
+        $apiKey = '0123456789';
+        $connector = $this->getMock('MphpFlickrBase\Connector\AbstractConnector', array(), array($apiKey));
+
+        $reflectionObject = new \ReflectionObject($connector);
+        $reflectionMethod = $reflectionObject->getMethod('getServiceUri');
+        $reflectionMethod->setAccessible(true);
+
+        $this->assertInternalType('string',$reflectionMethod->invoke($connector));
+    }
+
+    public function testGetHttpClient()
+    {
+        $apiKey = '0123456789';
+        $connector = $this->getMock('MphpFlickrBase\Connector\AbstractConnector', array(), array($apiKey));
+
+        $reflectionObject = new \ReflectionObject($connector);
+        $reflectionMethod = $reflectionObject->getMethod('getHttpClient');
+        $reflectionMethod->setAccessible(true);
+
+        $this->assertInstanceOf('Zend\Http\Client', $reflectionMethod->invoke($connector));
+    }
+
+    public function testGetRequest()
+    {
+        $apiKey = '0123456789';
+        $connector = $this->getMock('MphpFlickrBase\Connector\AbstractConnector', array(), array($apiKey));
+
+        $reflectionObject = new \ReflectionObject($connector);
+        $reflectionMethod = $reflectionObject->getMethod('getRequest');
+        $reflectionMethod->setAccessible(true);
+
+        $this->assertInstanceOf('Zend\Http\Request', $reflectionMethod->invoke($connector, 'http://foo.com'));
+    }
 }
