@@ -1,6 +1,6 @@
 <?php
 /**
- * InvalidParameterException.php
+ * InvalidAdapterException.php
  *
  * PHP Version  PHP 5.3.10
  *
@@ -12,14 +12,13 @@
 namespace MphpFlickrBase\Exception;
 
 /**
- * InvalidParameterException
+ * InvalidAdapterException
  *
  * @category   MphpFlickrBase
  * @package    MphpFlickrBase
  * @subpackage MphpFlickrBase\Exception
  * @author     David White [monkeyphp] <git@monkeyphp.com>
  */
-class InvalidParameterException extends \Exception
+class InvalidAdapterException extends \Exception
 {
-
 }
