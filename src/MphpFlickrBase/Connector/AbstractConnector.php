@@ -75,7 +75,7 @@ abstract class AbstractConnector implements ConnectorInterface
      *
      * @var string
      */
-    protected $defaultFormat = 'rest'; // rest|json
+    protected $defaultFormat;// = 'rest'; // rest|json
 
     /**
      * Instance of \Zend\Http\Client that this Connector uses to
@@ -255,6 +255,9 @@ abstract class AbstractConnector implements ConnectorInterface
      */
     protected function getDefaultFormat()
     {
+        if (! isset($this->defaultFormat)) {
+            $this->defaultFormat = $this->getAdapterFactory()->getDefaultFormat();
+        }
         return $this->defaultFormat;
     }
 
@@ -332,13 +335,14 @@ abstract class AbstractConnector implements ConnectorInterface
     /**
      * Return an array of valid format values
      *
-     * @todo This should require a call to an Adapter factory class
+     * This method makes a call to the AdapterFactory for an array of formats
+     * that it supports
      *
      * @return array
      */
     protected function getValidFormats()
     {
-        return array('rest', 'json');
+        return $this->getAdapterFactory()->getFormats();
     }
 
     /**

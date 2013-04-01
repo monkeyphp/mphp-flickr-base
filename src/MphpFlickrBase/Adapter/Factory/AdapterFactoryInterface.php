@@ -33,10 +33,18 @@ interface AdapterFactoryInterface
     public function makeAdapter($format, $results, $parameters);
 
     /**
-     * Return an array of formats that this Factory supports
+     * Return an array of formats that this AdapterFactoryInterface supports
      *
      * @return array
      */
     public function getFormats();
-    
+
+    /**
+     * Return a string representing the default response format that this
+     * AdapterFactoryInterface supports
+     *
+     * @return string
+     */
+    public function getDefaultFormat();
+
 }
