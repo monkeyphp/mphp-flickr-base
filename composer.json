@@ -37,7 +37,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.14",
-        "apigen/apigen": "*"
+        "apigen/apigen": "*",
+        "squizlabs/php_codesniffer": "1.4.4"
     },
     "autoload": {
         "psr-0": {

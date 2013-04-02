@@ -4,3 +4,4 @@ composer.lock
 nbproject/
 tests/log/
 docs/
+coding_standard

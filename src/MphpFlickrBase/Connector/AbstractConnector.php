@@ -75,7 +75,7 @@ abstract class AbstractConnector implements ConnectorInterface
      *
      * @var string
      */
-    protected $defaultFormat;// = 'rest'; // rest|json
+    protected $defaultFormat;
 
     /**
      * Instance of \Zend\Http\Client that this Connector uses to

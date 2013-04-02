@@ -58,4 +58,7 @@ This means that the developer may specify whichever format of data they want
 returning from the Flickr api, the high level Result and ResultSet classes will
 still work as expected.
 
+phpcs -i
+phpcs -pvw  --standard=PSR1 --report=full --report-file=./coding_standard ./src
+
 php -f apigen.php -- --source ../../../src/ --destination ../../../docs/ --php "no" --todo "yes" --source-code "yes" --main "MphpFlickrBase" --title "MphpFlickrBase"
