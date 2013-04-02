@@ -135,7 +135,7 @@ abstract class AbstractConnector implements ConnectorInterface
     {
         try {
             // prepare the parameters
-            $parameters = $this->prepareParameters();
+            $parameters = $this->prepareParameters($parameters);
 
             // retrieve an instance of \Zend\Http\Request configured with the
             // the service uri and the prepared parameters
