@@ -27,7 +27,7 @@ use RuntimeException;
  * @author     David White [monkeyphp] <git@monkeyphp.com>
  * @abstract
  */
-class AbstractResultAdapter extends \MphpFlickrBase\Adapter\AbstractResultAdapter
+abstract class AbstractResultAdapter extends \MphpFlickrBase\Adapter\AbstractResultAdapter
 {
 
     /**

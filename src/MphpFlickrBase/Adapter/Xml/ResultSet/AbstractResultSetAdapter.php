@@ -28,7 +28,7 @@ use SplFixedArray;
  * @subpackage MphpFlickrBase\Adapter\Xml\ResultSet
  * @abstract
  */
-class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSetAdapter
+abstract class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\AbstractResultSetAdapter
 {
 
     /**
