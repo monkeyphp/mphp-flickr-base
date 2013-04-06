@@ -42,6 +42,17 @@ abstract class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\Abstract
     protected $decodedResults;
 
     /**
+     * An array of results to construct ResultAdapters from
+     *
+     * @var array
+     */
+    protected $resultList;
+
+    protected function getResultAdapterClass()
+    {
+        return $this->resultAdapterClass;
+    }
+    /**
      *
      * @return \SplFixedArray
      */
@@ -98,7 +109,7 @@ abstract class AbstractResultSetAdapter extends \MphpFlickrBase\Adapter\Abstract
      */
     public function current()
     {
-        if (! $this->storage()->offsetExists($this->position)) {
+        if (! $this->getStorage()->offsetExists($this->position)) {
             $resultList = $this->getResultList();            // should return an array
             $resultArray = $resultList[$this->position];     // should return an array
             if (! $resultJson = json_encode($resultArray)) { // @todo look at options
