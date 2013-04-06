@@ -112,12 +112,12 @@ class AbstractResultSetAdapterTest extends \PHPUnit_Framework_TestCase
 
         $decodedResults = $reflectionMethod->invoke($jsonResultSetAdapter);
 
-        $this->assertInstanceOf('array', $decodedResults);
+        $this->assertInternalType('array', $decodedResults);
     }
 
     /**
      * Test that passing invalid JSON to the ResultSetAdapter throws an Exception
-     * 
+     *
      * @expectedException MphpFlickrBase\Exception\InvalidResponseException
      */
     public function testGetDecodedResultsErrorSyntax()
